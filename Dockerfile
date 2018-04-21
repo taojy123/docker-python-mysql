@@ -1,23 +1,6 @@
 FROM mysql:5.5
 
 
-RUN echo "deb http://mirrors.163.com/debian/ stretch main non-free contrib" > /etc/apt/sources.list
-RUN echo "deb http://mirrors.163.com/debian/ stretch-updates main non-free contrib" | tee -a /etc/apt/sources.list
-RUN echo "deb http://mirrors.163.com/debian/ stretch-backports main non-free contrib" | tee -a /etc/apt/sources.list
-RUN echo "deb-src http://mirrors.163.com/debian/ stretch main non-free contrib" | tee -a /etc/apt/sources.list
-RUN echo "deb-src http://mirrors.163.com/debian/ stretch-updates main non-free contrib" | tee -a /etc/apt/sources.list
-RUN echo "deb-src http://mirrors.163.com/debian/ stretch-backports main non-free contrib" | tee -a /etc/apt/sources.list
-RUN echo "deb http://mirrors.163.com/debian-security/ stretch/updates main non-free contrib" | tee -a /etc/apt/sources.list
-RUN echo "deb-src http://mirrors.163.com/debian-security/ stretch/updates main non-free contrib" | tee -a /etc/apt/sources.list
-
-
-RUN apt-get update
-RUN apt-get install -y gcc
-RUN apt-get install -y net-tools iputils-ping vim
-RUN apt-get install -y libjpeg-dev zlib1g.dev python-dev
-RUN apt-get install -y busybox
-
-
 # =========================================================================================================================
 # https://github.com/docker-library/python/blob/04c9c2858a82f0558b4dc2e3788e65103b71af3b/2.7/stretch/slim/Dockerfile
 
@@ -39,6 +22,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 ENV GPG_KEY C01E1CAD5EA2C4F0B8E3571504C367C218ADD4FF
 ENV PYTHON_VERSION 2.7.14
+
+
+RUN echo "deb http://mirrors.163.com/debian/ stretch main non-free contrib" > /etc/apt/sources.list
+RUN echo "deb http://mirrors.163.com/debian/ stretch-updates main non-free contrib" | tee -a /etc/apt/sources.list
+RUN echo "deb http://mirrors.163.com/debian/ stretch-backports main non-free contrib" | tee -a /etc/apt/sources.list
+RUN echo "deb-src http://mirrors.163.com/debian/ stretch main non-free contrib" | tee -a /etc/apt/sources.list
+RUN echo "deb-src http://mirrors.163.com/debian/ stretch-updates main non-free contrib" | tee -a /etc/apt/sources.list
+RUN echo "deb-src http://mirrors.163.com/debian/ stretch-backports main non-free contrib" | tee -a /etc/apt/sources.list
+RUN echo "deb http://mirrors.163.com/debian-security/ stretch/updates main non-free contrib" | tee -a /etc/apt/sources.list
+RUN echo "deb-src http://mirrors.163.com/debian-security/ stretch/updates main non-free contrib" | tee -a /etc/apt/sources.list
+
+
 
 RUN set -ex \
 	&& buildDeps=" \
@@ -122,6 +117,13 @@ RUN set -ex; \
 
 
 # =========================================================================================================================
+
+
+RUN apt-get update
+RUN apt-get install -y gcc
+RUN apt-get install -y net-tools iputils-ping vim
+RUN apt-get install -y libjpeg-dev zlib1g.dev python-dev
+RUN apt-get install -y busybox
 
 
 
